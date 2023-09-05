@@ -16,12 +16,35 @@
     "noEmit": true,
     "jsx": "react-jsx",
     /* Linting */
-    "useDefineForClassFields": true,
     "strict": true,
+    "useDefineForClassFields": true,    
+    "noImplicitThis": true,
+    "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": false,
+    /* Paths */
+    "paths": {
+      "@assets/*": ["./public/assets/*"],
+      "@styles/*": ["./styles/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
+      "@definitions/*": ["./src/utils/definitions/*"],
+      "@constants/*": ["src/utils/constants/*"],
+      "@helpers/*": ["src/utils/helpers/*"],
+      "@typings/*": ["src/utils/typings/*"],
+      "@enums/*": ["src/utils/enums/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@theme/*": ["./src/theme/*"],
+      "@api-client/*": ["./src/api-client/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@items/*": ["./src/items/*"],
+      "@store/*": ["./src/store/*"]
+    }
   },
-  "include": ["src", "electron"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*/*.ts", "**/*/*.tsx"],
+  "exclude": ["node_modules"]
 }
