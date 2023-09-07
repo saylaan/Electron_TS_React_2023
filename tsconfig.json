@@ -3,11 +3,12 @@
     "target": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "commonjs",
+    "experimentalDecorators": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "dist",
     /* Bundler mode */
     "moduleResolution": "node",
@@ -27,23 +28,10 @@
     "noImplicitReturns": false,
     /* Paths */
     "paths": {
-      "@assets/*": ["./public/assets/*"],
-      "@styles/*": ["./styles/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@components/*": ["./src/components/*"],
-      "@definitions/*": ["./src/utils/definitions/*"],
-      "@constants/*": ["src/utils/constants/*"],
-      "@helpers/*": ["src/utils/helpers/*"],
-      "@typings/*": ["src/utils/typings/*"],
-      "@enums/*": ["src/utils/enums/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@theme/*": ["./src/theme/*"],
-      "@api-client/*": ["./src/api-client/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@items/*": ["./src/items/*"],
-      "@store/*": ["./src/store/*"]
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*/*.ts", "**/*/*.tsx"],
   "exclude": ["node_modules"]

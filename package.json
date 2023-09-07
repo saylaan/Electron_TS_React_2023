@@ -1,6 +1,6 @@
 {
-  "name": "my-new-app",
-  "productName": "my-new-app",
+  "name": "my-alarm",
+  "productName": "my-alarm",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
@@ -9,9 +9,14 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "seed": "ts-node ./seed/index.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "electron",
+    "react",
+    "typescript"
+  ],
   "author": {
     "name": "geoff",
     "email": "geoffroy_-huck@hotmail.fr"
@@ -25,6 +30,7 @@
     "@electron-forge/maker-zip": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
     "@electron-forge/plugin-vite": "^6.4.1",
+    "@types/bluebird": "^3.5.38",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
@@ -40,8 +46,14 @@
     "@chakra-ui/react": "^2.8.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "bluebird": "^3.7.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "framer-motion": "^10.16.4",
+    "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.6"
   }
 }

@@ -2,7 +2,7 @@ import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
 import chakraTheme from '@chakra-ui/theme';
 /* Components Import */
 import { BasicLayout } from './layouts/BasicLayout';
-import { Clock } from './components/Clock';
+import { Alarm } from './components/Alarm';
 
 const { Button } = chakraTheme.components;
 
@@ -40,7 +40,7 @@ const App = () => {
   return (
     <ChakraBaseProvider theme={theme}>
       <BasicLayout>
-        <Clock />
+        <Alarm />
       </BasicLayout>
     </ChakraBaseProvider>
   );
