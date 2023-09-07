@@ -1,24 +1,19 @@
 /* Thirds-party Import */
 import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
-import { ipcRenderer } from 'electron';
 
 import { IAlarmListProps } from '.';
 
 const AlarmList: React.FC<IAlarmListProps> = () => {
   const [alarms, setAlarms] = useState('');
 
-  // const ipcRenderer = window.require('electron');
-
   const handleAlarm = async () => {
-    // ipcRenderer.send('request-alarm');
-    // const alarms = window.electron.receiveAlarms();
-    // setAlarms(alarms);
+    window.electron.ipcRenderer.once('ipc-example', (arg) => {
+      // eslint-disable-next-line no-console
+      console.log(arg);
+    });
+    window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
   };
-
-  // ipcRenderer.on('response-alarm', (event, arg) => {
-  //   setAlarms(arg);
-  // });
 
   return (
     <>

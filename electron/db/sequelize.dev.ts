@@ -20,4 +20,4 @@ const sequelizeConfig = new Sequelize({
 console.log('##################### END INIT MODELS #####################\n\n');
 console.log('##################### START INIT DB #######################');
 
-export const sequelize = sequelizeConfig;
+export const sequelizeDev = sequelizeConfig;

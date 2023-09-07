@@ -1,4 +1,5 @@
 import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import chakraTheme from '@chakra-ui/theme';
 /* Components Import */
 import { BasicLayout } from './layouts/BasicLayout';
@@ -22,26 +23,20 @@ const theme = extendBaseTheme({
 });
 
 const App = () => {
-  // function App({ Component, pageProps }: any) {
-  // const onGetAlarms = useCallback(async () => {
-  //   try {
-  //     const res: UserModel[] | undefined = await getUsersRequest();
-  //     if (res) setData(res);
-  //   } catch (error) {
-  //     const typedError = error as Error;
-  //     setErrorMessage(typedError.message);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   onGetAlarms();
-  // }, [onGetAlarms]);
-
   return (
     <ChakraBaseProvider theme={theme}>
-      <BasicLayout>
-        <Alarm />
-      </BasicLayout>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <BasicLayout>
+                <Alarm />
+              </BasicLayout>
+            }
+          />
+        </Routes>
+      </Router>
     </ChakraBaseProvider>
   );
 };
