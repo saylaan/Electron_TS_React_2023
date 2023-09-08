@@ -7,14 +7,14 @@ import { tryCatch } from '../utils/helpers';
 console.log('\n\n####n################ START INIT ROUTES ###################');
 console.log('###############  Route  ###############');
 export const routes = () => {
-  ipcMain.on('get-timers', async (event) => tryCatch(TimerController.index(event), event));
-  ipcMain.on('create-timer', async (event, arg) =>
+  ipcMain.on('get-alarms', async (event) => tryCatch(TimerController.index(event), event));
+  ipcMain.on('create-alarm', async (event, arg) =>
     tryCatch(TimerController.createTimer(event, arg), event),
   );
-  ipcMain.on('delete-timer', async (event, arg) =>
+  ipcMain.on('delete-alarm', async (event, arg) =>
     tryCatch(TimerController.deleteTimer(event, arg), event),
   );
-  ipcMain.on('update-timer', async (event, arg) =>
+  ipcMain.on('update-alarm', async (event, arg) =>
     tryCatch(TimerController.updateTimer(event, arg), event),
   );
 };

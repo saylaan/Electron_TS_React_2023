@@ -1,5 +1,5 @@
-const Timer = (sequelize, DataTypes) => {
-  const Timer = sequelize.define('Timer', {
+const Alarm = (sequelize, DataTypes) => {
+  const Alarm = sequelize.define('Alarm', {
     timestamp: DataTypes.INTEGER,
     is_active: {
       type: DataTypes.BOOLEAN,
@@ -16,7 +16,7 @@ const Timer = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   });
-  return Timer;
+  return Alarm;
 };
 
-module.exports = Timer;
+module.exports = Alarm;

@@ -1,28 +1,46 @@
 /* Thirds-party Import */
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 /* Components Import */
 import { BasicLayout } from '../../layouts/BasicLayout';
 import { Alarm } from '../Alarm';
-import { IHomeProps } from '.';
+/* Contexts Import */
+import { AlarmContext } from '../../contexts/AlarmContext';
+/* API Import */
+import { api } from '../../api-client/api';
+/* Models Import */
+import { AlarmModel } from '../../api-client/models/alarms/alarm.model';
+/* Constants Import */
+import { API_GET_ALARMS } from '../../api-client/api/api.contants';
+/* Utils Import */
+import { tryCatch } from '../..//utils/helpers';
+
+import { IHomeProps, ErrorFetchAlarms } from '.';
 
 const AlarmList: React.FC<IHomeProps> = () => {
-  // function App({ Component, pageProps }: any) {
-  // const onGetAlarms = useCallback(async () => {
-  //   try {
-  //     const res: UserModel[] | undefined = await getUsersRequest();
-  //     if (res) setData(res);
-  //   } catch (error) {
-  //     const typedError = error as Error;
-  //     setErrorMessage(typedError.message);
-  //   }
-  // }, []);
+  const [alarms, setAlarms] = useState<AlarmModel[]>([]);
 
-  // useEffect(() => {
-  //   onGetAlarms();
-  // }, [onGetAlarms]);
+  const getAlarm = async () => {
+    await api().getAlarms();
+    window.electron.ipcRenderer.once(`${API_GET_ALARMS}`, (arg) => {
+      setAlarms(arg as unknown as AlarmModel[]);
+    });
+  };
+
+  const onGetAlarms = useCallback(async () => tryCatch(getAlarm(), ErrorFetchAlarms), []);
+
+  useEffect(() => {
+    let isLoading = false;
+    if (!isLoading) onGetAlarms();
+    return () => {
+      isLoading = true;
+    };
+  }, [onGetAlarms]);
+
   return (
     <BasicLayout>
-      <Alarm />
+      <AlarmContext.Provider value={alarms}>
+        <Alarm />
+      </AlarmContext.Provider>
     </BasicLayout>
   );
 };

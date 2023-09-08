@@ -2,18 +2,18 @@ console.log('Preload has been load');
 
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = ['create-timer', 'update-timer', 'delete-timer', 'get-timers'];
+export type Channels = ['create-alarm', 'update-alarm', 'delete-alarm', 'get-alarms'];
 
 const matchChannel = (channel: string) => {
   switch (channel) {
-    case 'create-timer':
-      return 'create-timer';
-    case 'get-timers':
-      return 'get-timers';
-    case 'update-timer':
-      return 'update-timer';
-    case 'delete-timer':
-      return 'delete-timers';
+    case 'create-alarm':
+      return 'create-alarm';
+    case 'get-alarms':
+      return 'get-alarms';
+    case 'update-alarm':
+      return 'update-alarm';
+    case 'delete-alarm':
+      return 'delete-alarms';
     default:
       return 'ipc';
   }

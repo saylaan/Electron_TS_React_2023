@@ -1,22 +1,29 @@
 /* Thirds-party Import */
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@chakra-ui/react';
+/* API Import */
+import { api } from '../../../api-client/api';
+/* Contexts Import */
+import { AlarmContext } from '../../../contexts/AlarmContext';
 
 import { IAlarmListProps } from '.';
 
 const AlarmList: React.FC<IAlarmListProps> = () => {
-  const [alarms, setAlarms] = useState('');
+  const alarms = useContext(AlarmContext);
 
   const handleAlarm = async () => {
-    window.electron.ipcRenderer.once('create-timer', (arg) => {
-      console.log(arg);
-    });
-    window.electron.ipcRenderer.sendMessage('create-timer', ['ping']);
+    api().createAlarm({ timestamp: 131344141 });
   };
 
   return (
     <>
-      <span>List: {alarms}</span>
+      <span>List:</span>
+      <br></br>
+      <div>
+        {alarms.map((alarm, index) => (
+          <span key={index}>{alarm.id}</span>
+        ))}
+      </div>
       <br></br>
       <Button onClick={handleAlarm}>Click me</Button>
     </>

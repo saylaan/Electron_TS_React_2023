@@ -1,34 +1,34 @@
 /* Thirds-party  Import */
 /* Models Import */
-const { Timer } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
+const { Alarm } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 
 export const TimerController = {
   async index(event: any) {
     let timers = null;
-    timers = await Timer.findAll({
+    timers = await Alarm.findAll({
       limit: 100,
     });
-    event.reply('get-timers', timers);
+    event.reply('get-alarms', timers);
   },
   async createTimer(event: any, timer: any) {
-    const newTimer = await Timer.create({ ...timer });
-    if (!newTimer) event.reply('send-error', 'An error occur during the creation');
-    event.reply('create-timer', 'Timer has been created', newTimer.toJSON());
+    const newAlarm = await Alarm.create({ ...timer });
+    if (!newAlarm) event.reply('send-error', 'An error occur during the creation');
+    event.reply('create-alarm', 'Timer has been created', newAlarm.toJSON());
   },
-  async updateTimer(event: any, timer: any) {
-    const timerFound = await Timer.findByPk(timer.id);
-    if (!timerFound) event.reply('send-error', 'The timer does not exist');
-    const updateTimer = await Timer.update(timer, {
+  async updateTimer(event: any, alarm: any) {
+    const alarmFound = await Alarm.findByPk(alarm.id);
+    if (!alarmFound) event.reply('send-error', 'The timer does not exist');
+    const updateTimer = await Alarm.update(alarm, {
       where: {
-        id: timer.id,
+        id: Alarm.id,
       },
     });
-    event.reply('update-timer', 'Timer had been updated', updateTimer);
+    event.reply('update-alarm', 'Timer had been updated', updateTimer);
   },
   async deleteTimer(event: any, timerId: any) {
-    const timerFound = await Timer.findByPk(timerId);
-    if (!timerFound) event.reply('send-error', 'The timer does not exist');
-    if (timerFound) await timerFound.destroy();
-    event.reply('delete-timer', 'Timer has been deleted');
+    const alarmFound = await Alarm.findByPk(timerId);
+    if (!alarmFound) event.reply('send-error', 'The timer does not exist');
+    if (alarmFound) await alarmFound.destroy();
+    event.reply('delete-alarm', 'Timer has been deleted');
   },
 };

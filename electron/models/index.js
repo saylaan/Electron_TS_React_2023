@@ -30,7 +30,7 @@ const sequelize = new Sequelize(
   config.db.host,
 );
 
-const folderModels = ['Timer'];
+const folderModels = ['Alarm'];
 
 const isDirModels = (file) => {
   for (let i = 0; i < folderModels.length; i++) {
