@@ -17,24 +17,26 @@ export const AlarmController = {
     event.reply('create-alarm', 'Alarm has been created', newAlarm.toJSON());
   },
   async updateAlarm(event: any, alarm: any) {
-    const alarmFound = await Alarm.findByPk(alarm.id);
-    if (!alarmFound) event.reply('send-error', 'The alarm does not exist');
-    const updateAlarm = await Alarm.update(alarm, {
+    const alarmFound = await Alarm.findOne({
       where: {
-        id: Alarm.id,
+        id: alarm.id,
+      },
+    });
+    if (!alarmFound) event.reply('send-error', 'The alarm does not exist');
+    const updateAlarm = await Alarm.update(alarm.data, {
+      where: {
+        id: alarm.id,
       },
     });
     event.reply('update-alarm', 'Alarm had been updated', updateAlarm);
   },
   async deleteAlarm(event: any, alarmId: any) {
-    console.log('id la', alarmId);
     const alarmFound = await Alarm.findOne({
       where: {
         id: alarmId,
       },
     });
     if (!alarmFound) event.reply('send-error', 'The Alarm does not exist');
-    console.log(alarmFound);
     if (alarmFound) await alarmFound.destroy();
     event.reply('delete-alarm', 'Alarm has been deleted');
   },

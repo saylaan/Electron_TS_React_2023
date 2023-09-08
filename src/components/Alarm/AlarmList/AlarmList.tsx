@@ -57,14 +57,14 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
       if (alarm.id === id) {
         return {
           ...alarm,
-          is_active: alarm.is_active === true ? false : true,
+          is_active: !alarm.is_active,
         };
       }
 
       return alarm;
     });
     setAlarms(newState);
-    api().updateAlarm({ timestamp: 1313441410 }, id);
+    api().updateAlarm(newState[id - 1], id);
   };
 
   const onEdit = async (id: number) => {
@@ -80,6 +80,7 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     if (alarmContext) setAlarms(alarmContext);
   }, [alarmContext]);
 
+  console.log(alarms);
   return (
     <>
       {modal && (

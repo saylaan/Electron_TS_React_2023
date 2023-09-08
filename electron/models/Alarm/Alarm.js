@@ -3,7 +3,7 @@ const Alarm = (sequelize, DataTypes) => {
     timestamp: DataTypes.DATE,
     is_active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
     update_at: {
       type: DataTypes.DATE,
