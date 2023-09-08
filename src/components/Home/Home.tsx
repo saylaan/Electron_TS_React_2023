@@ -1,7 +1,6 @@
 /* Thirds-party Import */
 import React, { useCallback, useEffect, useState } from 'react';
 /* Components Import */
-import { BasicLayout } from '../../layouts/BasicLayout';
 import { Alarm } from '../Alarm';
 /* Contexts Import */
 import { AlarmContext } from '../../contexts/AlarmContext';
@@ -37,11 +36,9 @@ const AlarmList: React.FC<IHomeProps> = () => {
   }, [onGetAlarms]);
 
   return (
-    <BasicLayout>
-      <AlarmContext.Provider value={alarms}>
-        <Alarm />
-      </AlarmContext.Provider>
-    </BasicLayout>
+    <AlarmContext.Provider value={alarms}>
+      <Alarm />
+    </AlarmContext.Provider>
   );
 };
 

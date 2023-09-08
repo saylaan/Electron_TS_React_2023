@@ -1,22 +1,25 @@
 /* Thirds-party Import */
 import React from 'react';
-import { Box, AbsoluteCenter, Container } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+/* Components Import */
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
 
 import { IBasicLayoutProps } from '.';
 
 const BasicLayout: React.FC<IBasicLayoutProps> = ({ children }) => {
   return (
-    <Box h="100vh">
-      <AbsoluteCenter
-        p="4"
-        color="white"
-        axis="both">
-        <Container
-          maxW="md"
-          color="grey">
-          <div>{children}</div>
-        </Container>
-      </AbsoluteCenter>
+    <Box
+      bg="blackAlpha.900"
+      h="100vh">
+      <Flex
+        minHeight="100%"
+        justify="space-between"
+        direction="column">
+        <Header />
+        {children}
+        <Footer />
+      </Flex>
     </Box>
   );
 };

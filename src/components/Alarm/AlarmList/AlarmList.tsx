@@ -1,6 +1,6 @@
 /* Thirds-party Import */
-import React, { useContext, useState, useEffect } from 'react';
-import { Button } from '@chakra-ui/react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
+import { Button, List, Divider } from '@chakra-ui/react';
 /* API Import */
 import { api } from '../../../api-client/api';
 /* Contexts Import */
@@ -76,32 +76,37 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
   };
 
-  useEffect(() => {
-    if (alarmContext.length !== 0) setAlarms(alarmContext);
-  }, []);
+  useLayoutEffect(() => {
+    if (alarmContext) setAlarms(alarmContext);
+  }, [alarmContext]);
 
   return (
     <>
-      <span>My Alarms:</span>
-      <br></br>
-      {alarms.map((alarm, index) => (
-        <AlarmItem
-          key={index}
-          alarm={alarm}
-          idAlarm={alarm.id}
-          onDelete={onDelete(alarm.id)}
-          onChange={onChange(alarm.id)}
-          onEdit={onEdit(alarm.id)}
-        />
-      ))}
-      <br></br>
       {modal && (
         <Modal
           onClose={toggleModal}
           onSave={onSave}
           initialData={edit}></Modal>
       )}
-      <Button onClick={toggleModal}>Add Alarm</Button>
+      <List spacing={5}>
+        {alarms &&
+          alarms.map((alarm, index) => (
+            <AlarmItem
+              key={index}
+              alarm={alarm}
+              idAlarm={alarm.id}
+              onDelete={onDelete}
+              onChange={onChange}
+              onEdit={onEdit}
+            />
+          ))}
+        <Divider />
+      </List>
+      <Button
+        bg="whiteAlpha.800"
+        onClick={toggleModal}>
+        Add Alarm
+      </Button>
     </>
   );
 };

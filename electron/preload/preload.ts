@@ -6,14 +6,14 @@ export type Channels = ['create-alarm', 'update-alarm', 'delete-alarm', 'get-ala
 
 const matchChannel = (channel: string) => {
   switch (channel) {
-    case 'create-alarm':
-      return 'create-alarm';
     case 'get-alarms':
       return 'get-alarms';
+    case 'create-alarm':
+      return 'create-alarm';
     case 'update-alarm':
       return 'update-alarm';
     case 'delete-alarm':
-      return 'delete-alarms';
+      return 'delete-alarm';
     default:
       return 'ipc';
   }

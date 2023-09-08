@@ -1,6 +1,6 @@
 /* Thirds-party Import */
 import React, { useState, useEffect } from 'react';
-
+import { Text } from '@chakra-ui/react';
 import { IClockProps } from '.';
 
 const Clock: React.FC<IClockProps> = () => {
@@ -13,7 +13,17 @@ const Clock: React.FC<IClockProps> = () => {
     };
   }, []);
 
-  return <>{time && <div>{time}</div>}</>;
+  return (
+    <>
+      {time && (
+        <Text
+          color="whiteAlpha.800"
+          fontSize="6xl">
+          {time}
+        </Text>
+      )}
+    </>
+  );
 };
 
 export default Clock;

@@ -1,6 +1,7 @@
 /* Thirds-party Import */
 import React from 'react';
-import { Button, Radio, RadioGroup } from '@chakra-ui/react';
+import { Button, Center, Text, Flex, ListItem } from '@chakra-ui/react';
+import Switch from 'react-switch';
 
 import { IAlarmItemProps } from '.';
 
@@ -9,31 +10,50 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
     return new Date(timestamp).toLocaleTimeString();
   };
 
-  function handleCheck() {
+  const handleCheck = () => {
     idAlarm && onChange(idAlarm);
-  }
+  };
 
-  function handleEdit() {
+  const handleEdit = () => {
     idAlarm && onEdit(idAlarm);
-  }
+  };
 
-  function handleDelete() {
+  const handleDelete = () => {
     idAlarm && onDelete(idAlarm);
-  }
+  };
 
   return (
-    <>
-      <div>
-        <RadioGroup>
-          <Radio onClick={handleCheck} />
-        </RadioGroup>
-        {<span>{getHourAlarm(alarm.timestamp)}</span>}
-        <div>
-          <Button onClick={handleDelete}>Delete</Button>
-          <Button onClick={handleEdit}>Edit</Button>
-        </div>
-      </div>
-    </>
+    <ListItem>
+      <Flex justify="space-between">
+        <Flex
+          direction={'column'}
+          justify="space-between">
+          <Text
+            color="whiteAlpha.800"
+            fontSize="3xl">
+            {getHourAlarm(alarm.timestamp)}
+          </Text>
+          <Flex justify="space-between">
+            <Button
+              bg="red.500"
+              onClick={handleDelete}>
+              Delete
+            </Button>
+            <Button
+              bg="blue.300"
+              onClick={handleEdit}>
+              Edit
+            </Button>
+          </Flex>
+        </Flex>
+        <Center marginLeft="10px">
+          <Switch
+            onChange={handleCheck}
+            checked={alarm.is_active}
+          />
+        </Center>
+      </Flex>
+    </ListItem>
   );
 };
 

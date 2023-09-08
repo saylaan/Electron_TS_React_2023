@@ -16,13 +16,13 @@ export const createAlarmRequest = async (data: any) => {
   window.electron.ipcRenderer.sendMessage(`${API_CREATE_ALARM}`, { ...data });
 };
 
-export const updateAlarmRequest = async (data: any, id: number) => {
+export const updateAlarmRequest = async (data: any, alarmId: number) => {
   window.electron.ipcRenderer.sendMessage(`${API_UPDATE_ALARM}`, {
     data: data,
-    id: id,
+    id: alarmId,
   });
 };
 
-export const deleteAlarmRequest = async (timerId: AlarmModel['id']) => {
-  window.electron.ipcRenderer.sendMessage(`${API_DELETE_ALARM}`, timerId);
+export const deleteAlarmRequest = async (alarmId: AlarmModel['id']) => {
+  window.electron.ipcRenderer.sendMessage(`${API_DELETE_ALARM}`, alarmId);
 };
