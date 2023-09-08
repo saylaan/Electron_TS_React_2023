@@ -8,10 +8,10 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
   const [alarms, setAlarms] = useState('');
 
   const handleAlarm = async () => {
-    window.electron.ipcRenderer.once('ipc-example', (arg) => {
+    window.electron.ipcRenderer.once('create-timer', (arg) => {
       console.log(arg);
     });
-    window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+    window.electron.ipcRenderer.sendMessage('create-timer', ['ping']);
   };
 
   return (

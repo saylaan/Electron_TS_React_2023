@@ -1,7 +1,7 @@
 /* Thirds-party  Import */
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
-import { api } from './api';
+import { routes } from '../routes';
 
 const isDev = process.env.NODE_ENV || false;
 
@@ -27,10 +27,10 @@ export function createMainWindow() {
     height: 600,
     backgroundColor: '#202020',
     show: false,
-    // autoHideMenuBar: true,
+    // ? autoHideMenuBar: true,
     icon: getAssetPath('icon.svg'),
     webPreferences: {
-      // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
+      // * Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
       nodeIntegration: true,
       contextIsolation: true,
       nodeIntegrationInWorker: true,
@@ -40,26 +40,39 @@ export function createMainWindow() {
     },
   });
 
+  /**
+   * Loading of the renderer html
+   */
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}`);
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
+  /**
+   * Add devtools to the app in development env (NODE_ENV=development)
+   */
   isDev && mainWindow.webContents.openDevTools();
 
-  // Show window when its ready to
+  /**
+   * Show window when its ready to
+   */
   mainWindow.on('ready-to-show', () => {
     if (mainWindow) mainWindow.show();
   });
 
-  // Close all windows when main window is closed
+  /**
+   * Close all windows when main window is closed
+   */
   mainWindow.on('close', () => {
     mainWindow = null;
     app.quit();
   });
 
-  if (mainWindow) api(mainWindow);
+  /**
+   * Initialize the routes
+   */
+  routes();
 
   return mainWindow;
 }

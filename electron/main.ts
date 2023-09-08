@@ -2,7 +2,7 @@
 import { app, BrowserWindow } from 'electron';
 const { sequelize } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 
-import { createMainWindow } from './main/window';
+import { createMainWindow } from './main/main-window';
 
 /** Handle creating/removing shortcuts on Windows when installing/uninstalling. */
 if (require('electron-squirrel-startup')) {
