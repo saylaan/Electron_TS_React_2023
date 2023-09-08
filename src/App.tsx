@@ -1,9 +1,7 @@
 import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import chakraTheme from '@chakra-ui/theme';
 /* Components Import */
-import { BasicLayout } from './layouts/BasicLayout';
-import { Alarm } from './components/Alarm';
+import { AppRoutes as Routes } from './components/Routes';
 
 const { Button } = chakraTheme.components;
 
@@ -25,18 +23,7 @@ const theme = extendBaseTheme({
 const App = () => {
   return (
     <ChakraBaseProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <BasicLayout>
-                <Alarm />
-              </BasicLayout>
-            }
-          />
-        </Routes>
-      </Router>
+      <Routes />
     </ChakraBaseProvider>
   );
 };

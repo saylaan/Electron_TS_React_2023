@@ -1,12 +1,11 @@
 /* Thirds-party Import */
 import React from 'react';
 /* Components Import */
-import { Clock } from './Clock';
-import { AlarmList } from './AlarmList';
+import { BasicLayout } from '../../layouts/BasicLayout';
+import { Alarm } from '../Alarm';
+import { IHomeProps } from '.';
 
-import { IAlarmProps } from '.';
-
-const Alarm: React.FC<IAlarmProps> = () => {
+const AlarmList: React.FC<IHomeProps> = () => {
   // function App({ Component, pageProps }: any) {
   // const onGetAlarms = useCallback(async () => {
   //   try {
@@ -21,13 +20,11 @@ const Alarm: React.FC<IAlarmProps> = () => {
   // useEffect(() => {
   //   onGetAlarms();
   // }, [onGetAlarms]);
-
   return (
-    <>
-      <Clock />
-      <AlarmList />
-    </>
+    <BasicLayout>
+      <Alarm />
+    </BasicLayout>
   );
 };
 
-export default Alarm;
+export default AlarmList;
