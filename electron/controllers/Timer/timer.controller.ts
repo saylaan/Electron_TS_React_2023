@@ -7,6 +7,7 @@ export const TimerController = {
     let timers = null;
     timers = await Alarm.findAll({
       limit: 100,
+      raw: true,
     });
     event.reply('get-alarms', timers);
   },

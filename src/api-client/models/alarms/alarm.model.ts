@@ -1,7 +1,7 @@
 export interface AlarmModel {
-  id: number | null;
-  timestamp: number | null;
-  is_active: string | null;
-  created_at: string | null;
-  updated_at: string | null;
+  id?: number;
+  timestamp: Date;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
 }

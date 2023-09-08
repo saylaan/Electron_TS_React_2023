@@ -1,6 +1,6 @@
 const Alarm = (sequelize, DataTypes) => {
   const Alarm = sequelize.define('Alarm', {
-    timestamp: DataTypes.INTEGER,
+    timestamp: DataTypes.DATE,
     is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

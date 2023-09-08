@@ -13,33 +13,16 @@ export const getAlarmsRequest = async () => {
 };
 
 export const createAlarmRequest = async (data: any) => {
-  window.electron.ipcRenderer.sendMessage('create-alarm', { ...data });
-  window.electron.ipcRenderer.once('create-alarm', (arg) => console.log(arg));
+  window.electron.ipcRenderer.sendMessage(`${API_CREATE_ALARM}`, { ...data });
 };
 
 export const updateAlarmRequest = async (data: any, id: number) => {
-  // try {
-  //   const res: AxiosResponse = await axiosInstance.patch(`${API_ADMIN_URL}/${id}`, data);
-  //   return res.data;
-  // } catch (err) {
-  //   if (err instanceof AxiosError) {
-  //     throw new AxiosError(err.response?.data?.error);
-  //   } else {
-  //     throw new Error('Unexpected error');
-  //   }
-  // }
+  window.electron.ipcRenderer.sendMessage(`${API_UPDATE_ALARM}`, {
+    data: data,
+    id: id,
+  });
 };
 
 export const deleteAlarmRequest = async (timerId: AlarmModel['id']) => {
-  // try {
-  //   const res = await axiosInstance.delete(`${API_ADMIN_URL}/${userId}`);
-  //   return res.data;
-  // } catch (err) {
-  //   if (err instanceof AxiosError) {
-  //     throw new AxiosError(err.response?.data?.error);
-  //   } else {
-  //     throw new Error('Unexpected error');
-  //   }
-  // }
+  window.electron.ipcRenderer.sendMessage(`${API_DELETE_ALARM}`, timerId);
 };
-3;
