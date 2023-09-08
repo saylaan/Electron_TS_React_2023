@@ -38,5 +38,13 @@ export default defineConfig(({ mode }) => {
         $styles: path.join(rootDir, 'src/styles'),
       },
     },
+    build: {
+      rollupOptions: {
+        external: ['serialport', 'sqlite3'],
+        // input: {
+        //   main: path.join(__dirname, 'index.html'),
+        // },
+      },
+    },
   };
 });

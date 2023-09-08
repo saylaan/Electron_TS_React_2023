@@ -1,6 +1,6 @@
 /* Thirds-party  Import */
 /* Models Import */
-import { Timer } from '../../models/Timer/timer.model';
+const { Timer } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 
 export const TimerController = {
   async index() {
@@ -22,7 +22,9 @@ export const TimerController = {
   },
   async createTimer(timer: any) {
     try {
-      const newTimer = await Timer.create(timer);
+      console.log('trying to create', timer);
+      const newTimer = await Timer.create({ ...timer });
+      console.log('timer created', newTimer);
       // if (!newTimer)
       // send error ipc
       const jsonTimer = newTimer.toJSON();
@@ -43,8 +45,8 @@ export const TimerController = {
   // },
   async updateTimer(timerId: number, timer: any) {
     try {
-      const timer = await Timer.findByPk(timerId);
-      // if (!timer)
+      const timerFound = await Timer.findByPk(timerId);
+      // if (!timerFound)
       // send error ipc
       const updateTimer = await Timer.update(timer, {
         where: {
@@ -62,7 +64,7 @@ export const TimerController = {
       const foundTimer = await Timer.findByPk(timerId);
       // if (!timer)
       // send error ipc
-      await foundTimer.destroy();
+      if (foundTimer) await foundTimer.destroy();
       // send data ipc
     } catch (err) {
       // send error ipc

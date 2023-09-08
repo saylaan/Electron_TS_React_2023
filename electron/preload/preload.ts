@@ -29,3 +29,32 @@ const electronHandler = {
 contextBridge.exposeInMainWorld('electron', electronHandler);
 
 export type ElectronHandler = typeof electronHandler;
+
+// NOTE: never use eval here because it can cause security issues.
+
+// // notification example:
+// contextBridge.exposeInMainWorld('e_notification', {
+//   sendNotification(message) {
+//     ipcRenderer.invoke('notify', message);
+//   },
+// });
+
+// // Export the apis per feature here:
+// contextBridge.exposeInMainWorld('api_todos', {
+//   async getTodos() {
+//     const result = await ipcRenderer.invoke('get-todos');
+//     return result;
+//   },
+//   async addTodo(description) {
+//     await ipcRenderer.invoke('add-todo', description);
+//   },
+//   async updateTodo(args) {
+//     await ipcRenderer.invoke('update-todo', args);
+//   },
+//   async deleteTodo(todoId) {
+//     await ipcRenderer.invoke('delete-todo', todoId);
+//   },
+//   async deleteTodos() {
+//     await ipcRenderer.invoke('delete-todos');
+//   },
+// });

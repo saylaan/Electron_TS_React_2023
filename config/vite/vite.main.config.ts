@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 /**
  * Main process - Vite configuration
@@ -11,10 +12,11 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['serialport', 'sqlite3'],
-      // input: {
-      //   main: path.join(__dirname, 'index.html'),
-      // },
+      output: {
+        globals: { crypto: 'crypto' },
+      },
+      external: ['serialport', 'sqlite3', 'crypto'],
+      plugins: [nodeResolve({ preferBuiltins: true })],
     },
   },
 });

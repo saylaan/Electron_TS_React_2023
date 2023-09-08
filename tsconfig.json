@@ -31,16 +31,6 @@
       "@/*": [
         "src/*"
       ],
-      "$main": ["./src/main"],
-      "$main/*": ["./src/main/*"],
-      "$renderer": ["./src/renderer"],
-      "$renderer/*": ["./src/renderer/*"],
-      "$assets": ["./assets"],
-      "$assets/*": ["./assets/*"],
-      "$components": ["./src/renderer/components"],
-      "$components/*": ["./src/renderer/components/*"],
-      "$styles": ["./src/renderer/styles"],
-      "$styles/*": ["./src/renderer/styles/*"]
     },
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*/*.ts", "**/*/*.tsx", "seed", "electron", "src"],

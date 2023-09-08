@@ -34,7 +34,7 @@ module.exports = {
       config: {
         build: [
           {
-            entry: path.join(rootDir, 'electron/main/main.ts'),
+            entry: path.join(rootDir, 'electron/main.ts'),
             config: path.join(rootDir, 'config/vite/vite.main.config.ts'),
           },
           {

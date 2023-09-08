@@ -7,7 +7,7 @@ export const config = {
   env: process.env.NODE_ENV,
   db: {
     database: process.env.DB_NAME || 'tabtracker',
-    user: process.env.DB_USER || 'tabtracker',
+    username: process.env.DB_USER || 'tabtracker',
     password: process.env.DB_PWD || 'tabtracker',
     options: {
       dialect: process.env.DIALECT || 'sqlite',
