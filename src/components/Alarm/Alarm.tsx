@@ -1,6 +1,6 @@
 /* Thirds-party Import */
 import React from 'react';
-import { Container, Center, Box, Text, Flex, VStack, StackDivider } from '@chakra-ui/react';
+import { Center, Box, Text, Flex } from '@chakra-ui/react';
 /* Components Import */
 import { AlarmList } from './AlarmList';
 

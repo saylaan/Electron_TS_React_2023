@@ -18,8 +18,11 @@ import '../../styles/modal.css';
 
 import { IAlarmModalProps } from '.';
 
-const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave }) => {
-  const [date, setDate] = useState<any>('');
+const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave, initialData }) => {
+  const [date, setDate] = useState<any>(
+    initialData ? initialData.timestamp : new Date().getHours(),
+  );
+
   const handleChange = (event: any) => setDate(event.target.value);
 
   const handleOnSave = () => {
@@ -27,10 +30,18 @@ const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave }) => {
     const newDate = new Date();
     newDate.setHours(hours, minutes);
 
-    onSave({
-      timestamp: new Date(newDate),
-      is_active: true,
-    });
+    if (initialData?.id) {
+      onSave({
+        id: initialData.id,
+        timestamp: new Date(newDate),
+        is_active: true,
+      });
+    } else {
+      onSave({
+        timestamp: new Date(newDate),
+        is_active: true,
+      });
+    }
   };
 
   return (

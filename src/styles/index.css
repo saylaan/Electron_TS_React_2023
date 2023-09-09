@@ -39,3 +39,9 @@ a:hover {
 hr {
   border-color: gray;
 }
+
+input {
+  border-radius: 5px;
+  width: 220px;
+  height: 40px
+}

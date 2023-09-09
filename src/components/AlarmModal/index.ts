@@ -6,6 +6,6 @@ export const ErrorFetchAlarms = 'Error while trying to fetch the alarms';
 
 export interface IAlarmModalProps {
   toggleModal: () => void;
-  initialData: AlarmModel | undefined;
+  initialData?: AlarmModel;
   onSave: (item: AlarmModel) => void;
 }

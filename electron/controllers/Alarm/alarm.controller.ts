@@ -14,7 +14,7 @@ export const AlarmController = {
   async createAlarm(event: any, alarm: any) {
     const newAlarm = await Alarm.create({ ...alarm });
     if (!newAlarm) event.reply('send-error', 'An error occur during the creation');
-    event.reply('create-alarm', 'Alarm has been created', newAlarm.toJSON());
+    event.reply('create-alarm', newAlarm.toJSON());
   },
   async updateAlarm(event: any, alarm: any) {
     const alarmFound = await Alarm.findOne({
@@ -23,12 +23,12 @@ export const AlarmController = {
       },
     });
     if (!alarmFound) event.reply('send-error', 'The alarm does not exist');
-    const updateAlarm = await Alarm.update(alarm.data, {
+    await Alarm.update(alarm.data, {
       where: {
         id: alarm.id,
       },
     });
-    event.reply('update-alarm', 'Alarm had been updated', updateAlarm);
+    event.reply('update-alarm', 'Alarm had been updated');
   },
   async deleteAlarm(event: any, alarmId: any) {
     const alarmFound = await Alarm.findOne({

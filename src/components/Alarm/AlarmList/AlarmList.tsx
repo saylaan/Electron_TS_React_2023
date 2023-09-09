@@ -1,5 +1,5 @@
 /* Thirds-party Import */
-import React, { useContext, useState, useLayoutEffect } from 'react';
+import React, { useContext, useState, useLayoutEffect, useEffect } from 'react';
 import { Button, VStack, StackDivider } from '@chakra-ui/react';
 /* API Import */
 import { api } from '../../../api-client/api';
@@ -32,19 +32,25 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     setModal(!modal);
   };
   const onSave = (alarm: AlarmModel) => {
-    const update = alarms.find((el) => el.id === alarm.id);
-    if (update) {
-      const updatedAlarm = alarms.map((el) => {
-        if (el.id === alarm.id) {
-          return alarm;
-        }
-        return el;
+    if (edit) {
+      const update = alarms.find((el) => el.id === alarm.id);
+      if (update) {
+        const updatedAlarm = alarms.map((el) => {
+          if (el.id === alarm.id) {
+            return alarm;
+          }
+          return el;
+        });
+        setAlarms(updatedAlarm);
+      }
+      api().updateAlarm({ ...alarm }, alarm.id);
+      window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
+    } else {
+      api().createAlarm({ ...alarm });
+      window.electron.ipcRenderer.once(`${API_CREATE_ALARM}`, (arg) => {
+        setAlarms([...alarms, arg as unknown as AlarmModel]);
       });
-      setAlarms(updatedAlarm);
     }
-    api().createAlarm({ timestamp: 1313441410 });
-    window.electron.ipcRenderer.once(`${API_CREATE_ALARM}`, (arg) => console.log(arg));
-    setAlarms([...alarms, alarm]);
     toggleModal();
   };
 
@@ -62,7 +68,6 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
           is_active: !alarm.is_active,
         };
       }
-
       return alarm;
     });
     setAlarms(newState);
@@ -75,8 +80,6 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
       setEdit(editAlarm);
     }
     toggleModal();
-    // api().updateAlarm({ timestamp: 1313441410 }, id);
-    // window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
   };
 
   useLayoutEffect(() => {
