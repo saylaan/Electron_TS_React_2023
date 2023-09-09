@@ -63,14 +63,24 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
       if (alarm.id === id) {
         return {
           ...alarm,
-          is_active: !alarm.is_active,
+          is_active: alarm.is_active ? 0 : 1,
         };
       }
       return alarm;
     });
-    console.log(newState);
     setAlarms(newState);
-    api().updateAlarm(newState[id - 1], id);
+    const newAlarm = alarms.map((alarm) => {
+      if (alarm.id === id) {
+        return alarm;
+      }
+    });
+    api().updateAlarm(
+      {
+        is_active: newAlarm[0]?.is_active,
+      },
+      id,
+    );
+    window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
   };
 
   const onEdit = async (id: number) => {

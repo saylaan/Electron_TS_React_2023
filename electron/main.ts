@@ -1,11 +1,11 @@
 /* Thirds-party  Import */
-import { app, BrowserWindow, Tray, Menu, shell } from 'electron';
-import path from 'path';
+import { app, BrowserWindow } from 'electron';
 /* Models Import */
 const { sequelize } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 /* Main Import */
-import { createMainWindow } from './main/main-window';
-import MenuBuilder from './main/menu';
+import { windowBuilder } from './main/windowBuilder';
+import { TrayBuilder } from './main/trayBuilder';
+import MenuBuilder from './main/menuBuilder';
 /* Services Import */
 import { scheduleAlarms } from './services/alarm.service';
 
@@ -23,35 +23,36 @@ app
     if (process.platform === 'win32') {
       app.setAppUserModelId('my-alarm');
     }
-    const win = createMainWindow();
+    const win = windowBuilder();
+
     /**
      * Emitted when the application is activated.
      */
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) {
-        createMainWindow();
+        windowBuilder();
       }
     });
 
-    const tray = new Tray(path.resolve(__dirname, 'assets/volta.png'));
-    tray.setTitle('my-alarm');
-    tray.setToolTip('Your personal alarm');
-    tray.on('click', () => {
-      win.isVisible() ? win.hide() : win.show();
-    });
-    const template = [{ label: 'Quit' }];
-    const ctxMenu = Menu.buildFromTemplate(template);
-    tray.setContextMenu(ctxMenu);
+    /**
+     * Set up the system tray app
+     */
+    TrayBuilder(win);
 
-    const menuBuilder = new MenuBuilder(win);
-    menuBuilder.buildMenu();
+    /**
+     * Set up the menu of the window
+     */
+    new MenuBuilder(win).buildMenu();
 
+    /**
+     * Schedule the cron alarm
+     */
     scheduleAlarms();
   })
   .catch(console.log);
 
 /**
- * Sync sequelize with the server
+ * Sync sequelize with the server and schedule cron alarm
  * {force : true} = deleting all data
  */
 sequelize

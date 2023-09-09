@@ -30,11 +30,19 @@ const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave, initialDa
     const newDate = new Date();
 
     newDate.setHours(hours as unknown as number, minutes as unknown as number);
-    onSave({
-      id: initialData && initialData.id ? initialData.id : undefined,
-      timestamp: new Date(newDate),
-      is_active: true,
-    });
+
+    if (initialData) {
+      onSave({
+        id: initialData.id,
+        timestamp: new Date(newDate),
+        is_active: 1,
+      });
+    } else {
+      onSave({
+        timestamp: new Date(newDate),
+        is_active: 1,
+      });
+    }
   };
 
   return (

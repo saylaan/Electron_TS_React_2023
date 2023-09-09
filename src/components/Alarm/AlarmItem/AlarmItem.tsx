@@ -12,6 +12,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
   const handleEdit = () => idAlarm && onEdit(idAlarm);
   const handleDelete = () => idAlarm && onDelete(idAlarm);
 
+
   return (
     <Box>
       <Flex justify="space-between">
@@ -39,7 +40,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
         <Center marginLeft="10px">
           <Switch
             onChange={handleCheck}
-            checked={alarm.is_active ? true : false}
+            checked={alarm.is_active === 0 ? false : true}
           />
         </Center>
       </Flex>

@@ -13,7 +13,7 @@ const isDev = process.env.NODE_ENV || false;
  * Create main window
  * @returns {BrowserWindow} Main window instance
  */
-export const createMainWindow = (): BrowserWindow => {
+export const windowBuilder = (): BrowserWindow => {
   let mainWindow: BrowserWindow | null;
   mainWindow = new BrowserWindow({
     width: 1024,
@@ -23,6 +23,7 @@ export const createMainWindow = (): BrowserWindow => {
     // ? autoHideMenuBar: true,
     icon: path.resolve(__dirname, 'assets/volta.png'),
     webPreferences: {
+      nodeIntegration: true,
       contextIsolation: true,
       nodeIntegrationInWorker: true,
       nodeIntegrationInSubFrames: true,
@@ -51,7 +52,7 @@ export const createMainWindow = (): BrowserWindow => {
    * Show window when its ready to
    */
   mainWindow.on('ready-to-show', () => {
-    if (mainWindow) mainWindow.show();
+    mainWindow && mainWindow.show();
   });
 
   /**

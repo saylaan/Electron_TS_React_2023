@@ -1,7 +1,9 @@
 [{
     "id": 1,
+    "is_active": false,
     "timestamp": 1694085900
 },{
     "id": 2,
+    "is_active": false,
     "timestamp": 1706110000
 }]

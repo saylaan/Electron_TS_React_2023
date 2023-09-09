@@ -1,8 +1,10 @@
 import { Notification } from 'electron';
 import path from 'path';
 const schedule = require('node-schedule');
-const { Alarm } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 const sound = require('sound-play');
+
+/* Import Models */
+const { Alarm } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 
 const NOTIFICATION_TITLE = 'Alarm';
 const NOTIFICATION_BODY = 'Wake up ! Your alarm just turn on !';
@@ -31,7 +33,7 @@ export const scheduleAlarms = async () => {
   });
   if (alarms) {
     alarms.forEach((alarm: any) => {
-      if (alarm.is_active === true) {
+      if (alarm.is_active === 1) {
         const date = new Date(alarm.timestamp);
         const rule = new schedule.RecurrenceRule();
         rule.hour = date.getHours();
