@@ -83,23 +83,33 @@ As you can see, we have 4 main directory inside the project.
 1/ Configuration
 
 The config folder contains two subfolders: vite and forge
+
 In Vite's case it will contain a file called `vite.config` which contains some configurations about how our application should be built with.
-We use Electron forge who is a all-in-one tool to package and distributing Electron applications.
-And Vite for the development environment
+
+We use Electron forge who is a all-in-one tool to package and distributing Electron applications inside file `forge.config.js`
+
 This configuration is very verbose and enable special node.js API.
+
 But it's really useful when developing an application with multiple process like this one
 
 2/ Back-end
 
 The back-end has a MVC design pattern.
+
 It's made with electron for the desktop app with all the configuration necessary.
+
 With the contextBridge to open Node API for the front-end inside `preload` file.
+
 All controllers are here. They manage the request to the database with sequelize.
+
 Models contains every model used by the application like alarm.
+
 Services contain every service used by the application for the management of alarms with `node-schedule`
 a npm package to create cron task.
+
 Routes are the routes that will be accessible for the front-end. The route here can be seen
 like the IPC communication of Electron.
+
 Utils contains some useful functions or classes which could be shared across differents parts of our code base.
 
 3/ Seed
@@ -130,14 +140,21 @@ How work the alarm :
 - When the hour of your alarm come, a notification his send with a sound.
 
 We have one `BasicLayout` use by the `HomePage`. We only have the root '/' enable.
+
 Inside this layout there is a header, footer and main content. All components are imported into this layout component.
+
 Inside the HomePage component, there is a list of Alarms. Each item represent each alarm created before with the hour.
+
 All the components are pretty basic, with low complexity to avoid unnecessary things.
 
 ### Improvement
 
 1 Add some features by adding some custom configuration for alarm (recurrence for exemple).
+
 2 Change the Alarm algorithm by waiting a action of the user to turn off.
+
 3 Review the responsivity of the application.
+
 4 Add some unit test to the application.
+
 5 Verify security of the app.
