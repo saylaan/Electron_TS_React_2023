@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron';
 const { sequelize } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
 /* Main Import */
 import { createMainWindow } from './main/main-window';
+import { scheduleAlarms } from './services/alarm.service';
 
 /** Handle creating/removing shortcuts on Windows when installing/uninstalling. */
 if (require('electron-squirrel-startup')) {
@@ -28,6 +29,7 @@ app
         createMainWindow();
       }
     });
+    scheduleAlarms();
   })
   .catch(console.log);
 
@@ -38,6 +40,7 @@ app
 sequelize
   .sync(/* { force: true } */)
   .then(() => {
+    setInterval(() => scheduleAlarms(), 10000);
     console.log('####################### END INIT DB #######################\n\n');
   })
   .catch((e: Error) => console.log(e));
