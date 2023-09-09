@@ -157,3 +157,5 @@ All the components are pretty basic, with low complexity to avoid unnecessary th
 4 Add some unit tests to the application.
 
 5 Verify the security of the app.
+
+6 Improve the system tray of the application
