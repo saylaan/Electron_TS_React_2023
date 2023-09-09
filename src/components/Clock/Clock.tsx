@@ -1,6 +1,7 @@
 /* Thirds-party Import */
 import React, { useState, useEffect } from 'react';
 import { Text } from '@chakra-ui/react';
+
 import { IClockProps } from '.';
 
 const Clock: React.FC<IClockProps> = () => {

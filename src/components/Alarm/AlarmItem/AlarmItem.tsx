@@ -2,25 +2,15 @@
 import React from 'react';
 import { Button, Center, Box, Text, Flex, ButtonGroup } from '@chakra-ui/react';
 import Switch from 'react-switch';
+/* Utils Import */
+import { getHourAlarm } from '../../../utils/date-utils';
 
 import { IAlarmItemProps } from '.';
 
 const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdit, idAlarm }) => {
-  const getHourAlarm = (timestamp: Date): string => {
-    return new Date(timestamp).toLocaleTimeString();
-  };
-
-  const handleCheck = () => {
-    idAlarm && onChange(idAlarm);
-  };
-
-  const handleEdit = () => {
-    idAlarm && onEdit(idAlarm);
-  };
-
-  const handleDelete = () => {
-    idAlarm && onDelete(idAlarm);
-  };
+  const handleCheck = () => idAlarm && onChange(idAlarm);
+  const handleEdit = () => idAlarm && onEdit(idAlarm);
+  const handleDelete = () => idAlarm && onDelete(idAlarm);
 
   return (
     <Box>
@@ -30,7 +20,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
           justify="space-between">
           <Text
             color="whiteAlpha.800"
-            fontSize="3xl">
+            fontSize="5xl">
             {getHourAlarm(alarm.timestamp)}
           </Text>
           <ButtonGroup spacing="2">

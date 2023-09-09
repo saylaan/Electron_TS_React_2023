@@ -7,25 +7,39 @@ module.exports = {
     asar: false,
     executableName: 'MyAlarm',
     appCopyright: 'Copyright (C) 2023 Huck Geoffroy, MyAlarm',
-    icon: path.resolve('assets/vite.svg'),
+    icon: path.resolve(__dirname, 'assets/volta'),
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        setupIcon: path.resolve(__dirname, 'assets/volta.png'),
+      },
     },
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      config: {
+        name: 'myalarm',
+        icon: path.resolve(__dirname, 'assets/volta.png'),
+      },
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          icon: path.resolve(__dirname, 'assets/volta.png'),
+        },
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        options: {
+          icon: path.resolve(__dirname, 'assets/volta.png'),
+        },
+      },
     },
   ],
   plugins: [

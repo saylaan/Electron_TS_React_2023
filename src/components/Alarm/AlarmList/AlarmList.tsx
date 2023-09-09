@@ -26,9 +26,7 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
   const [edit, setEdit] = useState<AlarmModel>();
 
   const toggleModal = () => {
-    if (modal) {
-      setEdit(undefined);
-    }
+    if (modal) setEdit(undefined);
     setModal(!modal);
   };
   const onSave = (alarm: AlarmModel) => {
@@ -70,15 +68,14 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
       }
       return alarm;
     });
+    console.log(newState);
     setAlarms(newState);
     api().updateAlarm(newState[id - 1], id);
   };
 
   const onEdit = async (id: number) => {
     const editAlarm = alarms.find((alarm) => alarm.id === id);
-    if (editAlarm) {
-      setEdit(editAlarm);
-    }
+    if (editAlarm) setEdit(editAlarm);
     toggleModal();
   };
 

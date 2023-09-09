@@ -1,26 +1,19 @@
 /* Thirds-party  Import */
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+/* Routes Import */
 import { routes } from '../routes';
-
-const isDev = process.env.NODE_ENV || false;
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
-const RESOURCES_PATH = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '../../assets');
-
-const getAssetPath = (...paths: string[]): string => {
-  return path.join(RESOURCES_PATH, ...paths);
-};
+const isDev = process.env.NODE_ENV || false;
 
 /**
  * Create main window
  * @returns {BrowserWindow} Main window instance
  */
-export function createMainWindow() {
+export const createMainWindow = (): BrowserWindow => {
   let mainWindow: BrowserWindow | null;
   mainWindow = new BrowserWindow({
     width: 1024,
@@ -28,9 +21,8 @@ export function createMainWindow() {
     backgroundColor: '#202020',
     show: false,
     // ? autoHideMenuBar: true,
-    icon: getAssetPath('icon.svg'),
+    icon: path.resolve(__dirname, 'assets/volta.png'),
     webPreferences: {
-      nodeIntegration: true,
       contextIsolation: true,
       nodeIntegrationInWorker: true,
       nodeIntegrationInSubFrames: true,
@@ -51,7 +43,9 @@ export function createMainWindow() {
   /**
    * Add devtools to the app in development env (NODE_ENV=development)
    */
-  isDev && mainWindow.webContents.openDevTools();
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   /**
    * Show window when its ready to
@@ -74,4 +68,4 @@ export function createMainWindow() {
   routes();
 
   return mainWindow;
-}
+};

@@ -19,29 +19,22 @@ import '../../../styles/modal.css';
 import { IAlarmModalProps } from '.';
 
 const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave, initialData }) => {
-  const [date, setDate] = useState<any>(
+  const [date, setDate] = useState<Date | number>(
     initialData ? initialData.timestamp : new Date().getHours(),
   );
 
   const handleChange = (event: any) => setDate(event.target.value);
 
   const handleOnSave = () => {
-    const [hours, minutes] = date.split(':');
+    const [hours, minutes] = (date as unknown as string).split(':');
     const newDate = new Date();
-    newDate.setHours(hours, minutes);
 
-    if (initialData?.id) {
-      onSave({
-        id: initialData.id,
-        timestamp: new Date(newDate),
-        is_active: true,
-      });
-    } else {
-      onSave({
-        timestamp: new Date(newDate),
-        is_active: true,
-      });
-    }
+    newDate.setHours(hours as unknown as number, minutes as unknown as number);
+    onSave({
+      id: initialData && initialData.id ? initialData.id : undefined,
+      timestamp: new Date(newDate),
+      is_active: true,
+    });
   };
 
   return (
@@ -81,7 +74,7 @@ const AlarmModal: React.FC<IAlarmModalProps> = ({ toggleModal, onSave, initialDa
               placeholder="Select Time"
               size="lg"
               type="time"
-              value={date}
+              value={date as unknown as string}
               onChange={handleChange}
             />
           </CardBody>
