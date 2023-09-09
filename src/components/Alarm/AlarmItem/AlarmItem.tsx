@@ -1,6 +1,6 @@
 /* Thirds-party Import */
 import React from 'react';
-import { Button, Center, Box, Text, Flex } from '@chakra-ui/react';
+import { Button, Center, Box, Text, Flex, ButtonGroup } from '@chakra-ui/react';
 import Switch from 'react-switch';
 
 import { IAlarmItemProps } from '.';
@@ -33,7 +33,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
             fontSize="3xl">
             {getHourAlarm(alarm.timestamp)}
           </Text>
-          <Flex justify="space-between">
+          <ButtonGroup spacing="2">
             <Button
               bg="red.500"
               onClick={handleDelete}>
@@ -44,7 +44,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
               onClick={handleEdit}>
               Edit
             </Button>
-          </Flex>
+          </ButtonGroup>
         </Flex>
         <Center marginLeft="10px">
           <Switch

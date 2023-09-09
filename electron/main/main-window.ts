@@ -23,8 +23,8 @@ const getAssetPath = (...paths: string[]): string => {
 export function createMainWindow() {
   let mainWindow: BrowserWindow | null;
   mainWindow = new BrowserWindow({
-    width: 860,
-    height: 600,
+    width: 1024,
+    height: 860,
     backgroundColor: '#202020',
     show: false,
     // ? autoHideMenuBar: true,

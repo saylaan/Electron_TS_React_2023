@@ -1,13 +1,13 @@
 /* Thirds-party Import */
 import React, { useContext, useState, useLayoutEffect } from 'react';
-import { useDisclosure, Button, VStack, StackDivider } from '@chakra-ui/react';
+import { Button, VStack, StackDivider } from '@chakra-ui/react';
 /* API Import */
 import { api } from '../../../api-client/api';
 /* Contexts Import */
 import { AlarmContext } from '../../../contexts/AlarmContext';
 /* Components Import */
 import { AlarmItem } from '../AlarmItem';
-import { ModalApp } from '../../ModalApp';
+import { AlarmModal } from '../../AlarmModal';
 /* Models Import */
 import { AlarmModel } from '../../../api-client/models/alarms/alarm.model';
 /* Constant Import */
@@ -24,10 +24,13 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
   const [modal, setModal] = useState(false);
   const [alarms, setAlarms] = useState<AlarmModel[]>([]);
   const [edit, setEdit] = useState<AlarmModel>();
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const toggleModal = () => {
+    if (modal) {
+      setEdit(undefined);
+    }
+    setModal(!modal);
+  };
   const onSave = (alarm: AlarmModel) => {
     const update = alarms.find((el) => el.id === alarm.id);
     if (update) {
@@ -42,7 +45,7 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     api().createAlarm({ timestamp: 1313441410 });
     window.electron.ipcRenderer.once(`${API_CREATE_ALARM}`, (arg) => console.log(arg));
     setAlarms([...alarms, alarm]);
-    onClose();
+    toggleModal();
   };
 
   const onDelete = async (id: number) => {
@@ -71,8 +74,9 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     if (editAlarm) {
       setEdit(editAlarm);
     }
-    api().updateAlarm({ timestamp: 1313441410 }, id);
-    window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
+    toggleModal();
+    // api().updateAlarm({ timestamp: 1313441410 }, id);
+    // window.electron.ipcRenderer.once(`${API_UPDATE_ALARM}`, (arg) => console.log(arg));
   };
 
   useLayoutEffect(() => {
@@ -81,13 +85,11 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
 
   return (
     <>
-      {isOpen && (
-        <ModalApp
-          onClose={onClose}
-          finalRef={finalRef}
-          initialRef={initialRef}
-          isOpen={isOpen}
+      {modal && (
+        <AlarmModal
+          toggleModal={toggleModal}
           onSave={onSave}
+          initialData={edit}
         />
       )}
       <VStack
@@ -108,7 +110,7 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
       </VStack>
       <Button
         bg="whiteAlpha.800"
-        onClick={onOpen}>
+        onClick={toggleModal}>
         Add Alarm
       </Button>
     </>

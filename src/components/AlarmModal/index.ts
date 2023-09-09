@@ -1,13 +1,11 @@
-export { default as ModalApp } from './ModalApp';
+export { default as AlarmModal } from './AlarmModal';
 /* Models Import */
 import { AlarmModel } from '../../api-client/models/alarms/alarm.model';
 
 export const ErrorFetchAlarms = 'Error while trying to fetch the alarms';
 
-export interface IModalAppProps {
-  initialRef: any;
-  finalRef: any;
-  isOpen: any;
-  onClose: any;
+export interface IAlarmModalProps {
+  toggleModal: () => void;
+  initialData: AlarmModel | undefined;
   onSave: (item: AlarmModel) => void;
 }
