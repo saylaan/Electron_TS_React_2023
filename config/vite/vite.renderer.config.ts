@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: ['serialport', 'sqlite3'],
+        external: ['serialport', 'sqlite3', 'path'],
         // input: {
         //   main: path.join(__dirname, 'index.html'),
         // },

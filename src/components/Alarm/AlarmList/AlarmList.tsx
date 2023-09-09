@@ -1,5 +1,5 @@
 /* Thirds-party Import */
-import React, { useContext, useState, useLayoutEffect, useEffect } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
 import { Button, VStack, StackDivider } from '@chakra-ui/react';
 /* API Import */
 import { api } from '../../../api-client/api';
@@ -7,7 +7,7 @@ import { api } from '../../../api-client/api';
 import { AlarmContext } from '../../../contexts/AlarmContext';
 /* Components Import */
 import { AlarmItem } from '../AlarmItem';
-import { AlarmModal } from '../../AlarmModal';
+import { AlarmModal } from '../AlarmModal';
 /* Models Import */
 import { AlarmModel } from '../../../api-client/models/alarms/alarm.model';
 /* Constant Import */

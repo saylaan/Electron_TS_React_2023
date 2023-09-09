@@ -6062,6 +6062,11 @@
     "ip" "^2.0.0"
     "smart-buffer" "^4.2.0"
 
+"sound-play@^1.1.0":
+  "integrity" "sha512-Bd/L0AoCwITFeOnpNLMsfPXrV5GG5NhrC/T6odveahYbhPZkdTnrFXRia9FCC5WBWdUTw1d+yvLBvi4wnD1xOA=="
+  "resolved" "https://registry.npmjs.org/sound-play/-/sound-play-1.1.0.tgz"
+  "version" "1.1.0"
+
 "source-map-js@^1.0.2":
   "integrity" "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw=="
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"

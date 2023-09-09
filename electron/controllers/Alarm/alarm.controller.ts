@@ -1,6 +1,6 @@
-/* Thirds-party  Import */
 /* Models Import */
 const { Alarm } = require('../../electron/models'); // models folder with index.js file who return a sequelize obj
+import { showNotification } from '../../main/notification';
 
 export const AlarmController = {
   async index(event: any) {
@@ -38,6 +38,7 @@ export const AlarmController = {
     });
     if (!alarmFound) event.reply('send-error', 'The Alarm does not exist');
     if (alarmFound) await alarmFound.destroy();
+    showNotification();
     event.reply('delete-alarm', 'Alarm has been deleted');
   },
 };

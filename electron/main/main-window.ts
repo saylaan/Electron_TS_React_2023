@@ -30,7 +30,6 @@ export function createMainWindow() {
     // ? autoHideMenuBar: true,
     icon: getAssetPath('icon.svg'),
     webPreferences: {
-      // * Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
       nodeIntegration: true,
       contextIsolation: true,
       nodeIntegrationInWorker: true,

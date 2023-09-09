@@ -15,7 +15,7 @@ export default defineConfig({
       output: {
         globals: { crypto: 'crypto' },
       },
-      external: ['serialport', 'sqlite3', 'crypto'],
+      external: ['serialport', 'sqlite3', 'crypto', 'path'],
       plugins: [nodeResolve({ preferBuiltins: true })],
     },
   },

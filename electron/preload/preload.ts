@@ -1,6 +1,6 @@
 console.log('Preload has been load');
 
-import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
+import { contextBridge, ipcRenderer, IpcRendererEvent, Notification } from 'electron';
 
 export type Channels = ['create-alarm', 'update-alarm', 'delete-alarm', 'get-alarms'];
 
@@ -36,6 +36,7 @@ const electronHandler = {
       ipcRenderer.once(matchChannel(channel), (_event, ...args) => func(...args));
     },
   },
+  Notification,
 };
 
 contextBridge.exposeInMainWorld('electron', electronHandler);

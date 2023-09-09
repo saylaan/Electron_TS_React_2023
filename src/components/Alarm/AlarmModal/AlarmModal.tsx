@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 /* CSS Import */
-import '../../styles/modal.css';
+import '../../../styles/modal.css';
 
 import { IAlarmModalProps } from '.';
 

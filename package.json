@@ -2,7 +2,7 @@
   "name": "my-alarm",
   "productName": "my-alarm",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Project using react, typescript, electron, forge, vite, sqlite3, sequelize, chakraUI. Use it to have your own desktop alarm",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -11,7 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "seed": "ts-node ./seed/index.ts",
-    "rebuild": "electron-rebuild -f -w crypto"
+    "rebuild": "electron-rebuild -f -w electron"
   },
   "config": {
     "forge": "./config/forge/forge.config.js"
@@ -19,7 +19,12 @@
   "keywords": [
     "electron",
     "react",
-    "typescript"
+    "typescript",
+    "forge",
+    "sqlite3",
+    "vite",
+    "sequelize",
+    "chakra"
   ],
   "author": {
     "name": "geoff",
@@ -69,6 +74,7 @@
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1",
     "sequelize-typescript": "^2.1.5",
+    "sound-play": "^1.1.0",
     "sqlite3": "^5.1.6",
     "vite-plugin-electron": "^0.14.0",
     "vite-plugin-electron-renderer": "^0.14.5"
