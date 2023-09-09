@@ -42,7 +42,8 @@ app
     /**
      * Set up the menu of the window
      */
-    new MenuBuilder(win).buildMenu();
+    const buildMenu = new MenuBuilder(win);
+    buildMenu.buildMenu();
 
     /**
      * Schedule the cron alarm

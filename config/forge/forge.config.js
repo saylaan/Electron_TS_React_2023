@@ -13,9 +13,9 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {
-        setupIcon: path.resolve(__dirname, 'assets/volta.png'),
-      },
+      // config: {
+      //   setupIcon: path.resolve(__dirname, 'assets/volta.png'),
+      // },
     },
     {
       name: '@electron-forge/maker-zip',

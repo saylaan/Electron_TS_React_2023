@@ -1,4 +1,4 @@
-import notif1 from '../assets/notif1.mp3';
+import notif1 from '../../assets/notif1.mp3';
 
 export const notify = (title: string, msg: string): void => {
   new Notification(title, {

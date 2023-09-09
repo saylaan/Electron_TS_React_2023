@@ -1,16 +1,18 @@
 # Electron_TS_React_2023
 
-Little app using Electron, Typescript and React
+This project his a desktop alarm.
 
-## Tech
+## Technologies
 
 Stack used in this project:
-
+- ReactJS
+- Typescript
 - Electron
-- React
 - TypeScript
-
-If you add anything, please update this section.
+- Sequelize
+- Vite
+- Forge
+- SQLite3
 
 ## Installation
 
@@ -21,23 +23,121 @@ git clone
 npm i
 ```
 
-Setup .env.local
+### Setup .env
 
 ```sh
-cp .env.example .env.local
+cp .env.example .env
 ```
 
-IMAGES_DOMAIN = Your host url used for NextJs Images
-API_URL= Your WordPress url
+You might need to change the variable to make sur the project work on your environment
 
-Run development server
+### Run development server
 
 ```sh
-npm run dev
+npm start
 ```
 
-Run production server
+### Run production server
 
 ```sh
-npm run build && npm run start
+npm run make && npm run package
 ```
+
+## Structure
+
+.
+ * [config](./config)
+   * [vite](./config/vite)
+   * [forge](./config/forge)
+ * [electron](./electron)
+   * [configurations](./electron/configurations)
+   * [controllers](./electron/controllers)
+   * [main](./electron/main)
+   * [models](./electron/models)
+   * [preload](./electron/preload)
+   * [routes](./electron/routes)
+   * [services](./electron/services)
+   * [utils](./electron/utils)
+   * [main](./electron/main.ts)
+ * [seed](./seed)
+   * [Alarm](./seed/Alarm)
+   * [index.ts](./seed/index)
+ * [src](./src)
+   * [api-client](./src/api-client)
+   * [components](./src/components)
+   * [contexts](./src/contexts)
+   * [hooks](./src/hooks)
+   * [layouts](./src/layouts)
+   * [styles](./src/styles)
+   * [utils](./src/utils)
+   * [App.tsx](./src/App.tsx)
+   * [index.tsx](./src/index.tsx)
+
+As you can see, we have 4 main directory inside the project.
+
+- 'config' is all the configuration of building tools (Vite & Forge)
+- 'electron' is the back-end of the app in Electron
+- 'seed' is the little program to create data for the database
+- 'src' is the front-end of the app using React, Typescript and ChakraUI
+
+1/ Configuration
+
+The config folder contains two subfolders: vite and forge
+In Vite's case it will contain a file called `vite.config` which contains some configurations about how our application should be built with.
+We use Electron forge who is a all-in-one tool to package and distributing Electron applications.
+And Vite for the development environment
+This configuration is very verbose and enable special node.js API.
+But it's really useful when developing an application with multiple process like this one
+
+2/ Back-end
+
+The back-end has a MVC design pattern.
+It's made with electron for the desktop app with all the configuration necessary.
+With the contextBridge to open Node API for the front-end inside `preload` file.
+All controllers are here. They manage the request to the database with sequelize.
+Models contains every model used by the application like alarm.
+Services contain every service used by the application for the management of alarms with `node-schedule`
+a npm package to create cron task.
+Routes are the routes that will be accessible for the front-end. The route here can be seen
+like the IPC communication of Electron.
+Utils contains some useful functions or classes which could be shared across differents parts of our code base.
+
+3/ Seed
+
+This folder is only to create data inside the database with sequelize
+To run this you only need to launch this cmd :
+
+```sh
+  npm run seed
+```
+
+4/ Front-end
+
+The front-end is made in React 18.x.
+Chakra UI as our CSS framework.
+For the typing checking, we use Typescript.
+
+How work the alarm :
+
+- We can add new alarm by clicking on the `Create Alarm` button.
+
+- Inside the popup, we can set the hour of the alarm and save it by clicking on `Save`
+
+- Also, we can delete or edit by clicking on `Delete` or `Edit`
+
+- The switch button let the use enable or disable the alarm
+
+- When the hour of your alarm come, a notification his send with a sound.
+
+We have one `BasicLayout` use by the `HomePage`. We only have the root '/' enable.
+Inside this layout there is a header, footer and main content. All components are imported into this layout component.
+Inside the HomePage component, there is a list of Alarms. Each item represent each alarm created before with the hour.
+All the components are pretty basic, with low complexity to avoid unnecessary things.
+
+### Improvement
+
+1 Add some features by adding some custom configuration for alarm (recurrence for exemple).
+2 Change the Alarm algorithm by waiting a action of the user to turn off.
+3 Review the responsivity of the application.
+4 Add some unit test to the application.
+5 Verify security of the app.
