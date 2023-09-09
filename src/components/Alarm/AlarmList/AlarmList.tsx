@@ -1,13 +1,13 @@
 /* Thirds-party Import */
 import React, { useContext, useState, useLayoutEffect } from 'react';
-import { Button, List, Divider } from '@chakra-ui/react';
+import { useDisclosure, Button, VStack, StackDivider } from '@chakra-ui/react';
 /* API Import */
 import { api } from '../../../api-client/api';
 /* Contexts Import */
 import { AlarmContext } from '../../../contexts/AlarmContext';
 /* Components Import */
 import { AlarmItem } from '../AlarmItem';
-import { Modal } from '../../Modal';
+import { ModalApp } from '../../ModalApp';
 /* Models Import */
 import { AlarmModel } from '../../../api-client/models/alarms/alarm.model';
 /* Constant Import */
@@ -24,10 +24,9 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
   const [modal, setModal] = useState(false);
   const [alarms, setAlarms] = useState<AlarmModel[]>([]);
   const [edit, setEdit] = useState<AlarmModel>();
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onSave = (alarm: AlarmModel) => {
     const update = alarms.find((el) => el.id === alarm.id);
@@ -43,7 +42,7 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     api().createAlarm({ timestamp: 1313441410 });
     window.electron.ipcRenderer.once(`${API_CREATE_ALARM}`, (arg) => console.log(arg));
     setAlarms([...alarms, alarm]);
-    toggleModal();
+    onClose();
   };
 
   const onDelete = async (id: number) => {
@@ -80,16 +79,21 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
     if (alarmContext) setAlarms(alarmContext);
   }, [alarmContext]);
 
-  console.log(alarms);
   return (
     <>
-      {modal && (
-        <Modal
-          onClose={toggleModal}
+      {isOpen && (
+        <ModalApp
+          onClose={onClose}
+          finalRef={finalRef}
+          initialRef={initialRef}
+          isOpen={isOpen}
           onSave={onSave}
-          initialData={edit}></Modal>
+        />
       )}
-      <List spacing={5}>
+      <VStack
+        divider={<StackDivider borderColor="gray.500" />}
+        spacing={4}
+        align="stretch">
         {alarms &&
           alarms.map((alarm, index) => (
             <AlarmItem
@@ -101,11 +105,10 @@ const AlarmList: React.FC<IAlarmListProps> = () => {
               onEdit={onEdit}
             />
           ))}
-        <Divider />
-      </List>
+      </VStack>
       <Button
         bg="whiteAlpha.800"
-        onClick={toggleModal}>
+        onClick={onOpen}>
         Add Alarm
       </Button>
     </>

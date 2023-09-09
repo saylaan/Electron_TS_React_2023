@@ -17,6 +17,7 @@ const Header: React.FC<IHeaderProps> = () => {
           <Clock />
         </Center>
       </Box>
+      <hr />
     </Container>
   );
 };

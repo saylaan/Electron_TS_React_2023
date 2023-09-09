@@ -1,6 +1,6 @@
 /* Thirds-party Import */
 import React from 'react';
-import { Button, Center, Text, Flex, ListItem } from '@chakra-ui/react';
+import { Button, Center, Box, Text, Flex } from '@chakra-ui/react';
 import Switch from 'react-switch';
 
 import { IAlarmItemProps } from '.';
@@ -23,7 +23,7 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
   };
 
   return (
-    <ListItem>
+    <Box>
       <Flex justify="space-between">
         <Flex
           direction={'column'}
@@ -49,11 +49,14 @@ const AlarmItem: React.FC<IAlarmItemProps> = ({ alarm, onChange, onDelete, onEdi
         <Center marginLeft="10px">
           <Switch
             onChange={handleCheck}
-            checked={alarm.is_active}
+            checked={alarm.is_active ? true : false}
           />
         </Center>
       </Flex>
-    </ListItem>
+      <Box
+        position="relative"
+        padding="1"></Box>
+    </Box>
   );
 };
 
