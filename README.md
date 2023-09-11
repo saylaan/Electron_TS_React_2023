@@ -2,7 +2,7 @@
 
 This project his a desktop alarm.
 
-![image](https://github.com/saylaan/Electron_TS_React_2023/assets/36444471/59589d47-7be6-4caf-9f07-ad91c37a68a7)
+![image](https://github.com/saylaan/Electron_TS_React_2023/assets/36444471/adc53a23-a0ab-48bd-a7e2-da8cf8ee89f0)
 
 ## Technologies
 
