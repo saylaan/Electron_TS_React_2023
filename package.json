@@ -74,7 +74,7 @@
     "react-switch": "^7.0.0",
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1",
-    "sequelize-typescript": "^2.1.5",
+    "sequelize-typescript": "^2.1.6",
     "sound-play": "^1.1.0",
     "sqlite3": "^5.1.6",
     "vite-plugin-electron": "^0.14.0",
